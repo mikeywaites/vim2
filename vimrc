@@ -88,7 +88,7 @@ NeoBundle 'tomasr/molokai'
 " Misc
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'terryma/vim-smooth-scroll'
-NeoBundle "vim-scripts/YankRing.vim"
+" NeoBundle "vim-scripts/YankRing.vim"
 
 
 
