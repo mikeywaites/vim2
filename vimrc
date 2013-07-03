@@ -36,40 +36,39 @@ NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'SirVer/ultisnips'
 
 " Comments
-" NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'scrooloose/nerdcommenter'
 
 " File browsing
 NeoBundle 'scrooloose/nerdtree'
-" NeoBundle 'Shougo/vimfiler'
 
 "Buffers
 " NeoBundle 'sandeepcr529/Buffet.vim'
+NeoBundle 'corntrace/bufexplorer'
 
 " Text objects
-" NeoBundle 'tpope/vim-surround'
-" NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-repeat'
 
 " Git
 NeoBundle 'tpope/vim-fugitive'
 
 " Motions
-" NeoBundle 'Lokaltog/vim-easymotion'
-" NeoBundle 'goldfeld/vim-seek'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'goldfeld/vim-seek'
 
 " Syntax
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'nvie/vim-flake8'
 
 " Shell
-" NeoBundle 'thinca/vim-quickrun'
-" NeoBundle 'Shougo/vimshell'
-" NeoBundle 'tpope/vim-dispatch'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'Shougo/vimshell'
+NeoBundle 'tpope/vim-dispatch'
 
 " Tags
 NeoBundle 'majutsushi/tagbar'
 
 " File types
-" NeoBundle 'rstacruz/sparkup', {'rtp': 'vim'} "HTML
 NeoBundle 'tpope/vim-markdown' "Markdown
 NeoBundle 'terryma/vim-instant-markdown' "Markdown
 
@@ -87,8 +86,9 @@ NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'tomasr/molokai'
 
 " Misc
-" NeoBundle 'sjl/gundo.vim'
-" NeoBundle 'terryma/vim-smooth-scroll'
+NeoBundle 'sjl/gundo.vim'
+NeoBundle 'terryma/vim-smooth-scroll'
+NeoBundle "vim-scripts/YankRing.vim"
 
 
 
@@ -230,8 +230,8 @@ set laststatus=2
 set timeout timeoutlen=1000 ttimeoutlen=0
 
 " Reload vimrc when edited, also reload the powerline color
-" autocmd MyAutoCmd BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc
-"       \ so $MYVIMRC | call Pl#Load() | if has('gui_running') | so $MYGVIMRC | endif
+autocmd MyAutoCmd BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc
+\ so $MYVIMRC | call Pl#Load() | if has('gui_running') | so $MYGVIMRC | endif
 
 " Disable auto comment lines
 "autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -516,7 +516,7 @@ nnoremap <c-s><c-r> :%s/<c-r><c-w>//gc<left><left><left>
 nmap <c-s><c-w> ysiw
 
 " Ctrl-d: Scroll half a screen down smoothly
-" noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 3)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 3)<CR>
 
 " Ctrl-fm: (F)ind (M)RU and buffers
 nmap <c-f><c-m> [unite]u
@@ -656,7 +656,7 @@ inoremap <c-_> <c-o>u
 " Powerline
 "-------------------------------------------------------------------
 " Use the fancy version of Powerline symbols
-" let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols = 'fancy'
 
 
 "python from powerline.vim import setup as powerline_setup
@@ -740,8 +740,8 @@ nnoremap <silent> [unite]c :<C-u>Unite -buffer-name=commands command<CR>
 nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=bookmarks bookmark<CR>
 
 " Fuzzy search from current buffer
-" nnoremap <silent> [unite]b :<C-u>UniteWithBufferDir
-      " \ -buffer-name=files -prompt=%\  buffer file_mru bookmark file<CR>
+nnoremap <silent> [unite]b :<C-u>UniteWithBufferDir
+       \ -buffer-name=files -prompt=%\  buffer file_mru bookmark file<CR>
 
 " Quick commands
 nnoremap <silent> [unite]; :<C-u>Unite -buffer-name=history history/command command<CR>
@@ -945,11 +945,11 @@ au FileType python map <buffer> <leader>2 /def
 au FileType python map <buffer> <leader>C ?class
 au FileType python map <buffer> <leader>D ?def
 
-" if exists('+colorcolumn')
-    " set colorcolumn=80
-" else
-    " au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-" endif
+if exists('+colorcolumn')
+  set colorcolumn=80
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
 
 set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
