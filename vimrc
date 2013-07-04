@@ -656,7 +656,7 @@ inoremap <c-_> <c-o>u
 " Powerline
 "-------------------------------------------------------------------
 " Use the fancy version of Powerline symbols
-let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols = 'unicode'
 
 
 "python from powerline.vim import setup as powerline_setup
