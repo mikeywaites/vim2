@@ -51,6 +51,7 @@ NeoBundle 'tpope/vim-repeat'
 
 " Git
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle "tpope/vim-git"
 
 " Motions
 NeoBundle 'Lokaltog/vim-easymotion'
@@ -73,7 +74,7 @@ NeoBundle 'tpope/vim-markdown' "Markdown
 NeoBundle 'terryma/vim-instant-markdown' "Markdown
 
 " Status line
-NeoBundle 'terryma/vim-powerline'
+" NeoBundle 'terryma/vim-powerline'
 " Powerline is managed via python pip install
 " NeoBundle 'Lokaltog/powerline'
 
@@ -139,6 +140,15 @@ set background=dark
 
 " Colorscheme
 colorscheme jellybeans
+
+" hi User1 gui=NONE ctermfg=White        ctermbg=DarkGray  guifg=#a7dfff guibg=#333333 " File name
+" hi User2 gui=NONE ctermfg=LightRed     ctermbg=DarkGray  guifg=#ff9999 guibg=#333333 " File Flag
+" hi User3 gui=NONE ctermfg=White        ctermbg=DarkGray  guifg=#ffffff guibg=#333333 " File type
+" hi User4 gui=NONE ctermfg=Green        ctermbg=DarkGray  guifg=#90ff90 guibg=#333333 " Fugitive
+" hi User5 gui=NONE ctermfg=LightYellow  ctermbg=DarkGray  guifg=#ffffa0 guibg=#333333 " RVM
+" hi User6 gui=NONE ctermfg=White        ctermbg=DarkRed   guifg=#ffffff guibg=#af0000 " Syntax Errors
+" hi User7 gui=NONE ctermfg=White        ctermbg=Yellow    guifg=#ffff00 guibg=#333333
+" hi User8 gui=NONE ctermfg=Magenta      ctermbg=DarkGray  guifg=#99a0f9 guibg=#333333 " Position
 
 " Sets how many lines of history vim has to remember
 set history=10000
@@ -220,6 +230,39 @@ set t_vb=
 " Always show the statusline
 set laststatus=2
 
+set statusline=\ "
+set statusline+=%1*%-25.80f%*\ " file name minimum 25, maxiumum 80 (right justified)
+set statusline+=%2*
+set statusline+=%h "help file flag
+set statusline+=%r "read only flag
+set statusline+=%m "modified flag
+set statusline+=%w "preview flag
+set statusline+=%*\ "
+set statusline+=%3*[
+set statusline+=%{strlen(&ft)?&ft:'none'} " filetype
+set statusline+=]%*\ "
+set statusline+=%4*%{fugitive#statusline()}%*\ " Fugitive
+set statusline+=%6*%{SyntasticStatuslineFlag()}%* " Syntastic Syntax Checking
+set statusline+=%= " right align
+set statusline+=%8*%-14.(%l,%c%V%)\ %<%P%* " offset
+
+hi User1 ctermfg=064 ctermbg=234 cterm=bold
+hi User2 ctermfg=085 ctermbg=234 cterm=bold
+hi User3 ctermfg=238 ctermbg=234 cterm=bold
+hi User4 ctermfg=032 ctermbg=234 cterm=bold
+hi User5 ctermfg=044 ctermbg=234 cterm=bold
+hi User6 ctermfg=058 ctermbg=234 cterm=bold
+hi User7 ctermfg=240 ctermbg=234 cterm=bold
+hi User8 ctermfg=130 ctermbg=234 cterm=bold
+hi User9 ctermfg=065 ctermbg=234 cterm=bold
+
+
+hi StatusLine   ctermfg=239 ctermbg=234 cterm=bold
+hi StatusLineNC ctermfg=239 ctermbg=234 cterm=NONE
+
+let g:Active_statusline = &g:statusline
+
+
 
 " Column width indicator
 " set colorcolumn=+1
@@ -230,8 +273,8 @@ set laststatus=2
 set timeout timeoutlen=1000 ttimeoutlen=0
 
 " Reload vimrc when edited, also reload the powerline color
-autocmd MyAutoCmd BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc
-\ so $MYVIMRC | call Pl#Load() | if has('gui_running') | so $MYGVIMRC | endif
+" autocmd MyAutoCmd BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc
+" \ so $MYVIMRC | call Pl#Load() | if has('gui_running') | so $MYGVIMRC | endif
 
 " Disable auto comment lines
 "autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -656,12 +699,12 @@ inoremap <c-_> <c-o>u
 " Powerline
 "-------------------------------------------------------------------
 " Use the fancy version of Powerline symbols
-let g:Powerline_symbols = 'unicode'
+" let g:Powerline_symbols = 'fancy'
 
 
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
+" python from powerline.vim import setup as powerline_setup
+" python powerline_setup()
+" python del powerline_setup
 
 
 "-------------------------------------------------------------------
